@@ -37,7 +37,11 @@ module.exports = {
     },
     port: 3000,
     hot: true,
-    open: false
+    open: false,
+    server: {
+      type: "https"
+    },
+    allowedHosts: "all"
   }
 };
 
