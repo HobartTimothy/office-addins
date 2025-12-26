@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+           xsi:type="TaskPaneApp">
+
+  <!-- 基本信息 -->
+  <Id>00000000-0000-0000-0000-000000000001</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>YourName</ProviderName>
+  <DefaultLocale>zh-CN</DefaultLocale>
+  <DisplayName DefaultValue="S3 文件管理插件" />
+  <Description DefaultValue="在 Excel / Word 侧边栏中通过 AWS S3 浏览并插入文件内容。" />
+
+  <!-- 图标（可按需替换为你自己的路径） -->
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png" />
+
+  <!-- 支持的平台与宿主应用 -->
+  <SupportUrl DefaultValue="https://localhost:3000" />
+
+  <AppDomains>
+    <AppDomain>https://localhost:3000</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <!-- Excel -->
+    <Host Name="Workbook" />
+    <!-- Word -->
+    <Host Name="Document" />
+  </Hosts>
+
+  <DefaultSettings>
+    <!-- Task Pane 的页面地址（Webpack DevServer 输出的 HTML） -->
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html" />
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <!-- 版本覆盖：定义功能区按钮等 -->
+  <VersionOverrides xsi:type="ov:VersionOverrides" Version="1.0">
+    <ov:Hosts>
+
+      <!-- Excel 功能区 -->
+      <ov:Host xsi:type="ov:Workbook">
+        <ov:Ribbon>
+          <ov:Tabs>
+            <ov:Tab id="S3Addin.Tab">
+              <ov:Label resid="s3addin.tabLabel" />
+              <ov:Group id="S3Addin.Group">
+                <ov:Label resid="s3addin.groupLabel" />
+                <ov:Icon>
+                  <ov:bt:Image size="16" resid="s3addin.icon16" />
+                  <ov:bt:Image size="32" resid="s3addin.icon32" />
+                  <ov:bt:Image size="80" resid="s3addin.icon80" />
+                </ov:Icon>
+                <ov:Control xsi:type="ov:Button" id="S3Addin.TaskpaneButton">
+                  <ov:Label resid="s3addin.buttonLabel" />
+                  <ov:Supertip>
+                    <ov:Title resid="s3addin.buttonLabel" />
+                    <ov:Description resid="s3addin.buttonDescription" />
+                  </ov:Supertip>
+                  <ov:Icon>
+                    <ov:bt:Image size="16" resid="s3addin.icon16" />
+                    <ov:bt:Image size="32" resid="s3addin.icon32" />
+                    <ov:bt:Image size="80" resid="s3addin.icon80" />
+                  </ov:Icon>
+                  <ov:Action xsi:type="ov:ShowTaskpane">
+                    <ov:TaskpaneId>ButtonId1</ov:TaskpaneId>
+                    <ov:SourceLocation resid="s3addin.taskpaneUrl" />
+                  </ov:Action>
+                </ov:Control>
+              </ov:Group>
+            </ov:Tab>
+          </ov:Tabs>
+        </ov:Ribbon>
+      </ov:Host>
+
+      <!-- Word 功能区 -->
+      <ov:Host xsi:type="ov:Document">
+        <ov:Ribbon>
+          <ov:Tabs>
+            <ov:Tab id="S3Addin.Tab">
+              <ov:Label resid="s3addin.tabLabel" />
+              <ov:Group id="S3Addin.Group">
+                <ov:Label resid="s3addin.groupLabel" />
+                <ov:Icon>
+                  <ov:bt:Image size="16" resid="s3addin.icon16" />
+                  <ov:bt:Image size="32" resid="s3addin.icon32" />
+                  <ov:bt:Image size="80" resid="s3addin.icon80" />
+                </ov:Icon>
+                <ov:Control xsi:type="ov:Button" id="S3Addin.TaskpaneButton">
+                  <ov:Label resid="s3addin.buttonLabel" />
+                  <ov:Supertip>
+                    <ov:Title resid="s3addin.buttonLabel" />
+                    <ov:Description resid="s3addin.buttonDescription" />
+                  </ov:Supertip>
+                  <ov:Icon>
+                    <ov:bt:Image size="16" resid="s3addin.icon16" />
+                    <ov:bt:Image size="32" resid="s3addin.icon32" />
+                    <ov:bt:Image size="80" resid="s3addin.icon80" />
+                  </ov:Icon>
+                  <ov:Action xsi:type="ov:ShowTaskpane">
+                    <ov:TaskpaneId>ButtonId1</ov:TaskpaneId>
+                    <ov:SourceLocation resid="s3addin.taskpaneUrl" />
+                  </ov:Action>
+                </ov:Control>
+              </ov:Group>
+            </ov:Tab>
+          </ov:Tabs>
+        </ov:Ribbon>
+      </ov:Host>
+
+    </ov:Hosts>
+
+    <!-- 资源字符串与图标 -->
+    <ov:Resources>
+      <ov:bt:Images>
+        <ov:bt:Image id="s3addin.icon16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
+        <ov:bt:Image id="s3addin.icon32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
+        <ov:bt:Image id="s3addin.icon80" DefaultValue="https://localhost:3000/assets/icon-80.png" />
+      </ov:bt:Images>
+
+      <ov:bt:Urls>
+        <ov:bt:Url id="s3addin.taskpaneUrl" DefaultValue="https://localhost:3000/taskpane.html" />
+      </ov:bt:Urls>
+
+      <ov:bt:ShortStrings>
+        <ov:bt:String id="s3addin.tabLabel" DefaultValue="S3 插件" />
+        <ov:bt:String id="s3addin.groupLabel" DefaultValue="S3 工具" />
+        <ov:bt:String id="s3addin.buttonLabel" DefaultValue="打开 S3 面板" />
+      </ov:bt:ShortStrings>
+
+      <ov:bt:LongStrings>
+        <ov:bt:String id="s3addin.buttonDescription"
+                      DefaultValue="在侧边栏中打开 S3 文件管理器，从 Bucket 中浏览并插入文件内容。" />
+      </ov:bt:LongStrings>
+    </ov:Resources>
+  </VersionOverrides>
+</OfficeApp>
+
+
